@@ -38,7 +38,7 @@ class WP_Mustache_Shortcode {
 	 *
 	 * @var      string
 	 */
-	protected $plugin_slug = 'plugin-name';
+	protected $plugin_slug = 'wp-mustache-shortcode';
 
 	/**
 	 * Instance of this class.
@@ -87,6 +87,8 @@ class WP_Mustache_Shortcode {
 		// Define custom functionality. Read more about actions and filters: http://codex.wordpress.org/Plugin_API#Hooks.2C_Actions_and_Filters
 		add_action( 'TODO', array( $this, 'action_method_name' ) );
 		add_filter( 'TODO', array( $this, 'filter_method_name' ) );
+		
+		add_shortcode('mustache_shortcode', array($this,'mustache_shortcode'));
 
 	}
 
@@ -240,14 +242,21 @@ class WP_Mustache_Shortcode {
 	 * @since    1.0.0
 	 */
 	public function add_action_links( $links ) {
-
 		return array_merge(
 			array(
 				'settings' => '<a href="' . admin_url( 'plugins.php?page=plugin-name' ) . '">' . __( 'Settings', $this->plugin_slug ) . '</a>'
 			),
 			$links
 		);
-
+	}
+	
+	public function mustache_shortcode($atts) {
+		extract( shortcode_atts( 
+			array(
+				'foo' => 'something',
+				'bar' => 'something else',
+				), $atts ) );
+		return 'this is the mustache_shortcode content';
 	}
 
 	/**
