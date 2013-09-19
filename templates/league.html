@@ -1,10 +1,18 @@
 <h2>League</h2>
 
-Events
-{{# events }}
-  {{ . }} 
-{{/ events }}<br/>
+<table width="100%" class=" table-1">
 
+<thead>
+<tr><th>Name</th>
+{{# events }}
+{{> event }}
+{{/ events }}
+</tr>
+</thead>
+
+<tbody>
 {{# users }}
-  {{> user }}
-{{/ users }}<br/>
+<tr>{{> user }}</tr>
+{{/ users }}
+</tbody>
+</table>
