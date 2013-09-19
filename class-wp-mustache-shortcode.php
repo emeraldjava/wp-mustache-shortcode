@@ -274,7 +274,11 @@ class WP_Mustache_Shortcode {
 		return $template->render(
 			array(
 				'events' => array('eA','eB','eC'),
-				'users' => array('uA','uB','uC'),	
+				'users' => array(
+					array(name=>'uA',results=>array(1,2,3)),
+					array(name=>'uB',results=>array(1,2,3)),
+					array(name=>'uC',results=>array(1,2,3))
+				),
 				'message' => 'this is a html templates version content',
 				'id'=>$id,
 				'post'=>$p
