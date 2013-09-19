@@ -251,12 +251,15 @@ class WP_Mustache_Shortcode {
 	}
 	
 	public function mustache_shortcode($atts) {
+		
 		extract( shortcode_atts( 
 			array(
 				'foo' => 'something',
 				'bar' => 'something else',
 				), $atts ) );
-		return 'this is the mustache_shortcode content';
+		
+		$m = new Mustache_Engine;
+		return $m->render('Hello {{planet}}', array('planet' => 'this is the mustache_shortcode content')); // "Hello World!"		
 	}
 
 	/**
