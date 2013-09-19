@@ -262,6 +262,7 @@ class WP_Mustache_Shortcode {
 		$mustache = new Mustache_Engine(
 			array(
 				'loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__) . '/templates',$options),
+				'partials_loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__) . '/templates/partials',$options)
 			)
 		);
 		
@@ -269,13 +270,15 @@ class WP_Mustache_Shortcode {
 		$p = get_post( $id );
 
 		error_log('mustache_shortcode '.$p->ID);
-		$template = $mustache->loadTemplate('shortcode'); // loads __DIR__.'/views/foo.mustache';
+		$template = $mustache->loadTemplate('league'); // loads __DIR__.'/views/foo.mustache';
 		return $template->render(
-			array('message' => 'this is a html templates version content',
+			array(
+				'events' => array('eA','eB','eC'),
+				'users' => array('uA','uB','uC'),	
+				'message' => 'this is a html templates version content',
 				'id'=>$id,
 				'post'=>$p
-		)
-		);
+		));
 		//return $m->render('Hello {{planet}}', array('planet' => 'this is the mustache_shortcode content')); // "Hello World!"		
 	}
 
