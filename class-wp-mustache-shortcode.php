@@ -266,10 +266,15 @@ class WP_Mustache_Shortcode {
 		);
 		
 		$id = get_the_ID();
-		error_log('mustache_shortcode '.$id);
+		$p = get_post( $id );
+
+		error_log('mustache_shortcode '.$p->ID);
 		$template = $mustache->loadTemplate('shortcode'); // loads __DIR__.'/views/foo.mustache';
 		return $template->render(
-			array('message' => 'this is a html templates version content','id'=>$id)
+			array('message' => 'this is a html templates version content',
+				'id'=>$id,
+				'post'=>$p
+		)
 		);
 		//return $m->render('Hello {{planet}}', array('planet' => 'this is the mustache_shortcode content')); // "Hello World!"		
 	}
