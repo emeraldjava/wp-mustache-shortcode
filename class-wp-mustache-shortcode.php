@@ -258,8 +258,14 @@ class WP_Mustache_Shortcode {
 				'bar' => 'something else',
 				), $atts ) );
 		
-		$m = new Mustache_Engine;
-		return $m->render('Hello {{planet}}', array('planet' => 'this is the mustache_shortcode content')); // "Hello World!"		
+		$mustache = new Mustache_Engine(
+			array(
+				'loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__) . '/views'),
+			)
+		);
+		$template = $mustache->loadTemplate('shortcode'); // loads __DIR__.'/views/foo.mustache';
+		return $template->render(array('message' => 'this is the mustache_shortcode content'));
+		//return $m->render('Hello {{planet}}', array('planet' => 'this is the mustache_shortcode content')); // "Hello World!"		
 	}
 
 	/**
